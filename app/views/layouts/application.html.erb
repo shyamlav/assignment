@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DemoApplication</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">HIMS</a>
+      <% if user_signed_in? %>
+     <a class="brand" style="float:right;" href="/users/sign_out" data-method="delete" rel="nofollow">Logout</a>
+	<%else%>
+
+    <% end %>
+
+    </div>
+  </div><!-- /navbar-inner -->
+<%if notice%>
+<div class="alert alert-info"><%= notice %></div>
+<%end%>
+<%if alert%>
+ <div class="alert alert-warning"><%= alert %></div>
+<%end%>
+</div>
+<%= yield %>
+</body>
+</html>

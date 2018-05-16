@@ -1,0 +1,104 @@
+<style>
+html,body {
+  padding:0;
+  margin:0;
+  height:100%;
+  min-height:100%;
+ }
+
+.quarter{
+  width:50%;
+  height:100%;
+  float:left;
+}
+.contents{
+  height:50%;
+  width:100%;
+}
+</style>
+
+
+<div class="contents">
+<div class="col-md-6 quarter" style="align:center;">
+<%= form_tag({:action => 'create_patient'}) do %>
+<nav class="navbar navbar-light bg-faded justify-content-between">
+  <a class="navbar-brand">PATIENT</a><br \>
+  <form class="form-inline">
+    <%= text_field 'pat','name', autofocus: true,placeholder:"Name",class:"form-control mr-sm-2" %>
+<br \>
+    <%= text_field 'pat','number',placeholder:"Phone Number",class:"form-control mr-sm-2" %>
+</form>
+<br \>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+<%end%>
+</nav>
+</br>
+</div>
+<div class="col-md-6 quarter">
+<%= form_tag({:action => 'create_doctor'}) do %>
+<nav class="navbar navbar-light bg-faded justify-content-between">
+  <a class="navbar-brand">DOCTOR</a><br \>
+  <form class="form-inline">
+    <%= text_field 'doc','name_doc', autofocus: true,placeholder:"Name",class:"form-control mr-sm-2" %>
+<br \>
+    <%= text_field 'doc','number_doc',placeholder:"Phone Number",class:"form-control mr-sm-2" %>
+<br \>
+    <%= text_field 'doc','spec_doc',placeholder:"Specialization",class:"form-control mr-sm-2" %>
+</form>
+
+<br \>
+
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+<%end%>
+</nav>
+</br>
+</div>
+
+<div class="col-md-6 quarter">
+<%= form_tag({:action => 'create_appointment'}) do %>
+<nav class="navbar navbar-light bg-faded justify-content-between">
+  <a class="navbar-brand">APPOINTMENT</a><br \>
+  <form class="form-inline">
+<%= collection_select(:doc,:doc_id,Doctor.all,:id,:doctor_name,:prompt=>"Doctor Name")%>
+<br \>
+<%= collection_select(:doc,:pat_id,Patient.all,:id,:name,:prompt=>"Patient Name")%>
+<br \>
+    <%= text_field 'doc','app_dis',placeholder:"Diseases",class:"form-control mr-sm-2" %>
+</form>
+
+<br \>
+
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+<%end%>
+</nav>
+</br>
+
+</div>
+<div class="col-md-6 quarter">
+<nav class="navbar navbar-light bg-faded justify-content-between">
+  <a class="navbar-brand">VIEW APPOINTMENT</a><br \>
+<table class="table">
+    <thead>
+      <tr>
+        <th class="navbar-brand">PATIENT NAME </th>
+        <th class="navbar-brand">DOCTOR NAME</th>
+        <th class="navbar-brand">DISEASES</th>
+      </tr>
+    </thead>
+    <%for appointment in @appointment%>
+     <tr>
+	 <td><%=appointment.patient.name%></td>
+	 <td><%=appointment.doctor.doctor_name%></td>
+	 <td><%=appointment.diseases%></td>
+     </tr>
+     <%end%>
+</table>
+</nav>
+</br>
+
+</div>
+
+
+
+
+
